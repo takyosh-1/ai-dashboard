@@ -1,0 +1,115 @@
+.side-menu-container {
+  position: fixed;
+  top: 104px;
+  height: 952px;
+  width: 64px;
+  z-index: 0;
+  display: inline-block;
+}
+
+.menu-background {
+  background: #F0EBE3;
+  position: absolute;
+  left: 0;
+  z-index: -1;
+  width: 48px;
+  height: 100%;
+  border-radius: 0px 30px 30px 0px;
+}
+
+.indicator_square {
+  left: 48px;
+  width: 18px;
+  height: 44px;
+  position: absolute;
+  top: 470px;
+  text-align: center;
+  background: #F0EBE3;
+  transform: translate(-50%, -50%);
+  border-radius: 45px;
+  z-index: 4;
+  cursor: pointer;
+  transition: left 0.3s ease-in-out;
+}
+.indicator {
+  left: 48px;
+  width: 3px;
+  height: 15px;
+  position: absolute;
+  top: 470px;
+  background-image: url('../images/sidebar_button.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: translate(-50%, -50%);
+  border-radius: 45px;
+  z-index: 5;
+  transition: left 0.3s ease-in-out;
+}
+
+.menu {
+  position: relative;
+  top: 32px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  transition: all 0.3s ease-in-out;
+  overflow: visible;
+}
+
+.menu-item {
+  padding: 8px 12px;
+  border-top-right-radius: 999px;
+  border-bottom-right-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  max-width: none;
+  cursor: pointer;
+  color: #001964;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.menu-item.selected {
+    background-color: #001964;
+}
+
+.icon-container {
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.icon {
+  width: 24px;
+  height: 24px;
+  background: url('../images/article.png');
+  }
+
+.icon.selected {
+  background: url('../images/person.png');
+}
+
+
+.text {
+  flex: 1;
+  height: auto;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-family: "BIZ UDPGothic";
+  font-weight: 700;
+  line-height: 28px;
+  letter-spacing: 0.48px;
+  white-space: nowrap;
+}
+.side-menu-container.closed .menu-item {
+  width: 64px !important;
+}
+/* close 状態の場合は .text を非表示 */
+.side-menu-container.closed .text {
+  display: none !important;
+}

@@ -1,0 +1,89 @@
+:root {
+--brandcolor-Beige: #333333;
+--brandcolor-ABeamDarkBlue: #FFFFFF;
+}
+
+.navbar {
+display: flex;
+align-items: center;
+min-width: 1920px;
+width: max-content;
+height: 80px;
+background: var(--brandcolor-Beige);
+position: fixed;
+overflow: hidden;
+}
+
+.top-logo-container {
+height: 49px;
+background: #D9D9D9;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-shrink: 0;
+overflow: hidden;
+margin-right: 64px;
+padding: 0 37px 0 6.35px;
+}
+
+.top-logo-text {
+font-size: 28px;
+font-family: "BIZ UDPGothic";
+font-weight: 400;
+color: black;
+white-space: nowrap;
+overflow: hidden;
+line-height: 43.96px;
+letter-spacing: 0.56px;
+padding: 15px 12.69px 14px 6.35px;
+}
+
+.top-menu-container {
+display: flex;
+gap: 64px;
+align-items: center;
+white-space: nowrap;
+min-width: max-content;
+flex-grow: 1;
+overflow: hidden;
+}
+
+.top-menu-item {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+gap: 10px;
+cursor: pointer;
+}
+
+.top-menu-itemactive {
+text-decoration: none;       /* 念のため再度下線を消す */
+box-shadow: none;            /* 赤線が影だった場合も対応 */
+border-top: 2px solid var(--brandcolor-ABeamDarkBlue);
+border-bottom: 2px solid var(--brandcolor-ABeamDarkBlue);
+padding: 10px 0px 9px 0px;
+}
+
+.top-menu-item div {
+font-size: 19px;
+font-family: "Noto Sans JP";
+font-weight: 700;
+color: var(--brandcolor-ABeamDarkBlue);
+padding: 10px 0px 9px 0px;
+}
+
+/* .top-menu-item[data-select="disabled"] div {
+opacity: 0.3;
+} */
+
+.top-menu-item:hover{
+border-top: 2px solid var(--brandcolor-ABeamDarkBlue);
+border-bottom: 2px solid var(--brandcolor-ABeamDarkBlue);
+padding: 10px 0px 9px 0px;
+}
+
+.top-menu-item.active{
+border-top: 2px solid var(--brandcolor-ABeamDarkBlue);
+border-bottom: 2px solid var(--brandcolor-ABeamDarkBlue);
+padding: 10px 0px 9px 0px;
+}
