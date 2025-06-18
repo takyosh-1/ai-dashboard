@@ -13,12 +13,12 @@ app = Flask(__name__)
 # 環境変数を読み込む
 load_dotenv()
 
-# Azure OpenAI クライアント初期化 (テスト用にコメントアウト)
-# client = AzureOpenAI(
-#     api_key=os.getenv("AZURE_OPENAI_KEY"),
-#     azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-#     api_version="2024-12-01-preview",
-# )
+# Azure OpenAI クライアント初期化
+client = AzureOpenAI(
+    api_key=os.getenv("AZURE_OPENAI_KEY"),
+    azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
+    api_version="2024-12-01-preview",
+)
 
 @app.route("/")
 def main_page():
@@ -33,31 +33,36 @@ def view_page():
 @app.route("/generate", methods=["POST"])
 def generate():
 
+    with open(r"static\data\data\taishoku_data.csv", "r", encoding="utf-8") as file:
+        input_text = file.read()
+    user_input = """あなたはデータサイエンティストであり、人的資本経営に詳しい専門家です。
+                    以下に、退職者に関する従業員データ（CSV）をアップロードします。
+                    このデータを分析し、下に示した観点で分析してください。
+                    出力形式はMarkdown形式で、構造化してわかりやすく記述してください。
+                    なお、Pythonコードの使用も可能です。
+
+                    -- 分析観点 --
+                    ・退職者の基本的な傾向分析（年齢、性別、勤続年数など）
+                    ・離職率に関係しそうな重要な特徴の特定（要因分析）
+                    ・そこから導かれる示唆・仮説
+                    ・離職を減らすために注力すべき課題の特定
+                    ・解決策の提案（実行可能なアクション含む）
+
+                    -- CSVデータの内容は以下の通りです。CSVのヘッダーは「社員ID,氏名,退職日,入社日,勤続年数,所属部署,ランク,性別,年齢,前職,入社区分,退職理由カテゴリ,退職理由自由記述」です。--
+
+                    """ + input_text
+    
+    print(user_input)
+
     def stream():
-        mock_response = """# 退職者データ分析結果
-
-
-退職者データを分析した結果、以下の傾向が確認されました：
-
-- **年齢層**: 20代後半から30代前半の退職が多い
-- **勤続年数**: 2-3年での退職が最も多い
-- **部署別**: 営業部門の離職率が高い
-
-
-離職に関係する主要な要因：
-1. キャリア成長の機会不足
-2. ワークライフバランスの問題
-3. 給与・待遇への不満
-
-
-- メンター制度の導入
-- フレックスタイム制度の拡充
-- 定期的なキャリア面談の実施
-"""
-        
-        for char in mock_response:
-            time.sleep(0.02)  # 20ms間隔で文字を送信
-            yield char
+        response = client.chat.completions.create(
+            model="o3",  # ← Azureポータルで設定した「デプロイ名」に置き換えてください
+            messages=[{"role": "user", "content": user_input}],
+            stream=True,
+        )
+        for chunk in response:
+            if chunk.choices and chunk.choices[0].delta and chunk.choices[0].delta.content:
+                yield chunk.choices[0].delta.content
     return Response(stream_with_context(stream()), content_type="text/event-stream")
 
 ## 実行
