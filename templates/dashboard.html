@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}住民票記載事項証明書・住民票{% endblock %}
+
+{% block extra_style %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ai-dashboard.css') }}" />
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <iframe title="モックアップ" width="1000" height="952" src="https://app.powerbi.com/reportEmbed?reportId=f1301d71-9c71-4726-afe7-887468b9a531&autoAuth=true&ctid=a4dd5294-24e4-4102-8420-cb86d0baae1e" frameborder="0" allowFullScreen="true"></iframe>
+</div>
+<div class="ai-content">
+    <div style="display: flex;">
+        <div class="ai-content-title">
+            AIによる退職要因分析・改善策提案
+        </div>
+        <label class="selectbox-3">
+            <select>
+                <option>全て</option>
+                <option>営業</option>
+                <option>マーケ</option>
+            </select>
+        </label>
+        <div class="container">
+            <button onclick="startChat()">生成</button>
+        </div>
+    </div>
+    <div id="output"></div>
+    <script>
+        function startChat() {
+        const output = document.getElementById("output");
+        output.innerHTML = "";
+
+        fetch("/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: ""
+        }).then(response => {
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder("utf-8");
+            let markdown = "";
+
+            function readChunk() {
+            reader.read().then(({ done, value }) => {
+                if (done) return;
+                markdown += decoder.decode(value, { stream: true });
+                output.innerHTML = marked.parse(markdown);
+                readChunk();
+            });
+            }
+            readChunk();
+        });
+        }
+    </script>
+</div>
+{% endblock %}
+

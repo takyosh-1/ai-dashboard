@@ -1,0 +1,189 @@
+:root {
+  --ab: #000000; /* Define the variable with a valid color value */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  /* ページ全体の縦・横スクロールバーを消す */
+  overflow: hidden;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  background-color: var(--ab);
+  color: white;
+  /* padding: 0px 15px; */
+  z-index: 1000;
+}
+
+.header_text{
+  margin-top: 12px;
+  font-family: "Audiowide", Helvetica;
+  font-weight: 400;
+  color: #ffffff;
+  font-size: 24px;
+  margin-left: 12px;
+}
+
+
+/* メインコンテンツ */
+.main-content {
+  padding: 24px 49px 0px 49px;
+  position: fixed;
+  top: 80px; 
+  left: 63px; /* サイドバーの幅 */
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  height: 952px;
+  width: 1864px;
+  display:flex;
+}
+
+.initial_introdaction {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  transform: translate(-50%, -50%);
+  background-color: #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center; /* 横方向中央 */
+  align-items: center;     /* 縦方向中央 */
+  flex-direction: column;    /* 子要素を縦に並べる */
+
+  font-size: 30px;
+}
+
+.img-box {
+  width: 670px;             /* お好みの幅 */
+  height: 670px;            /* お好みの高さ */
+  margin: auto;        /* ページ中央寄せ */
+  
+  display: flex;            /* Flexbox 有効化 */
+  flex-direction: column;   /* 縦並び */
+  justify-content: center;  /* 垂直方向の中央揃え */
+  /* align-items: center;      水平方向の中央揃え */
+
+  box-sizing: border-box;
+}
+
+.img-box img {
+  max-height: 100%;
+  height: auto;             /* アスペクト比を維持 */
+  max-width: 100%;          /* 親幅を超えない */
+  display: block;
+}
+
+.content-title {
+  position: relative;
+  left: 0px;
+  top: 0px;
+  font-family: 'BIZ UDPGothic';
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1; /* 行の高さを1に設定して上揃えを実現 */
+  color: #000000;
+  font-weight: 700;
+  display: flex;
+  align-items: flex-start; /* 上揃え */
+  margin: 0; /* マージンをリセット */
+  margin-bottom: 30px; /* 退職者一覧とステータスの間隔を広げる */
+  padding: 0; /* パディングをリセット */
+}
+
+.name-title {
+  margin-top: 15px;
+  height: 20px;
+  font-family: 'BIZ UDPGothic';
+  font-style: normal;
+  font-size: 16px;
+  line-height: 1; /* 行の高さを1に設定して上揃えを実現 */
+  color: #000000;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.name-title.bottom {
+  bottom: 0px;
+  position: absolute;
+  margin-bottom: 20px;
+}
+
+
+.name-text {
+  margin-top: 15px;
+  font-size: 24px;
+  font-family: 'BIZ UDPGothic';
+  font-style: normal;
+  line-height: 1; /* 行の高さを1に設定して上揃えを実現 */
+  color: #000000;
+}
+
+/* View page specific styles */
+.status-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.status-label {
+  font-family: 'BIZ UDPGothic';
+  font-size: 16px;
+  font-weight: 700;
+  margin-right: 15px;
+}
+
+.status-value {
+  font-family: 'BIZ UDPGothic';
+  font-size: 24px;
+  font-weight: 700;
+  color: #000000;
+  margin-left: 15px;
+}
+
+.content-container {
+  display: flex;
+  gap: 60px;
+  margin-top: 15px;
+}
+
+.content-column {
+  flex: 1;
+}
+
+.field-container {
+  height: 100px; /* 高さを100pxに設定 */
+}
+
+.field-label {
+  font-family: 'BIZ UDPGothic';
+  font-size: 16px;
+  color: rgba(51, 51, 51, 0.3);
+  margin-bottom: 6px;
+}
+
+.field-value {
+  font-family: 'BIZ UDPGothic';
+  font-size: 16px;
+  color: #000000;
+  margin-top: 16px;
+  margin-left: 16px;
+}
+
+
+
+.schedule-section {
+  margin-top: 40px;
+}
+
+.schedule-title {
+  margin-top: 0;
+}

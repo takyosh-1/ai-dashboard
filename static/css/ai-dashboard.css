@@ -1,0 +1,159 @@
+:root {
+--brandcolor-Beige: #333333;
+--brandcolor-ABeamDarkBlue: white;
+}
+
+.ai-content-title {
+  position: relative;
+  left: 0px;
+  top: 30px;
+  margin-top:60px;
+  font-family: 'Arial';
+  font-style: normal;
+  font-size: 29px;
+  line-height: 1; /* 行の高さを1に設定して上揃えを実現 */
+  color: #000000;
+  font-weight: 700;
+  display: fixed;
+  align-items: flex-start; /* 上揃え */
+  margin: 0; /* マージンをリセット */
+  margin-bottom: 30px; /* 退職者一覧とステータスの間隔を広げる */
+  padding: 0; /* パディングをリセット */
+  width: 500px; /* 幅を指定してスクロール可能にする */
+  background-color: white;
+  height: 30px;
+}
+
+body {
+  background-color: white;
+  font-family: sans-serif;
+}
+
+.container {
+  width: 100px;
+  background-color: white;
+  height: 60px;
+  position: relative;
+}
+
+textarea {
+  width: 100%;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+button {
+  position: absolute;
+  bottom: 0;
+  width: 60px;
+  height: 44.8px;
+  font-size: 1rem;
+  background-color: #fff;
+  border: 1px solid #d0d0d0;
+  box-sizing: border-box;               /* ボーダー込みでサイズ計算 */
+  transition: background-color .2s,
+              border       .1s ease-in;  /* アニメーション */
+}
+
+/* ホバー時に背景を薄いグレーに */
+button:hover {
+  background-color: #f0f0f0;
+}
+
+/* クリック（アクティブ）時に枠線を太く黒に */
+button:active {
+  border: 2px solid #000;
+}
+
+#output {
+  margin-top: 2rem;
+  line-height: 1.4;
+  font-size: 1rem;
+}
+
+#output p {
+  margin: 0.2em 0;
+}
+
+#output ul, #output ol {
+  margin: 0.4em 0;
+  padding-left: 1.2em;
+}
+
+#output li {
+  margin-bottom: 0.1em;
+}
+
+#output h1, #output h2, #output h3 {
+  margin: 0.5em 0 0.3em;
+  line-height: 1.2;
+}
+
+/* 右カラムのコンテンツ（スクロール） */
+.ai-content {
+  flex: 1;
+  overflow-y: auto;       /* 縦スクロール許可 */
+  display: flex;
+  flex-direction: column;
+  background: white;
+  height: 952px; /* 高さを指定してスクロール可能にする */
+  width: 800px; /* 幅を指定してスクロール可能にする */
+}
+
+.ai-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ai-content::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.2);
+  border-radius: 4px;
+} 
+
+/* 右カラムのヘッダー（固定） */
+.dashboard {
+  flex: 0 0 auto;
+  background: #fff;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+  overflow: hidden;  /* これで縦横ともスクロールしなくなる */
+}
+
+.selectbox-3 {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    width: 200px;
+}
+
+.selectbox-3::after {
+    position: absolute;
+    right: 30px;
+    width: 10px;
+    height: 10px;
+    bottom: 20px;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    transform: rotate(-135deg);
+    pointer-events: none;
+    content: '';
+    z-index: 10;
+
+    /* background-color: #535353;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    pointer-events: none; */
+}
+
+.selectbox-3 select {
+    position: absolute;
+    appearance: none;
+    min-width: 180px;
+    height: 2.8em;
+    margin-left: 10px;
+    bottom: 0px;
+    padding: .4em calc(.8em + 60px) 0 .8em;
+    border: 1px solid #d0d0d0;
+    background-color: #fff;
+    color: #333333;
+    font-size: 1em;
+    cursor: pointer;
+}

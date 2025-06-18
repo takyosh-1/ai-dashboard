@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <title>{% block title %}Home{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main_style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/topmenu.css') }}" />
+    {% block extra_style %}{% endblock %}
+   </head>
+  <body>
+    <!-- トップメニューを表示するためのコード -->
+    <div class="navbar">
+      <div class="top-logo-container">
+          <div class="top-logo-text">ABeam人事管理システム</div>
+      </div>
+      <div class="top-menu-container">
+            <a class="top-menu-item">
+                <div>入社手続き</div>
+            </a>
+            <div class="top-menu-item">
+                <div>退職手続き</div>
+            </div>
+            <div class="top-menu-item active">
+                <div>退職傾向分析</div>
+            </div>
+            <div class="top-menu-item">
+                <div>設定</div>
+            </div>
+      </div>
+    </div>
+    <!-- サイドバーを表示するためのコード（ABeam コンポーネントライブラリに準拠） -->
+    <div class="side-menu-container">
+      <div class="menu-background"></div>
+      <div class="indicator_square"></div>
+      <div class="indicator"></div>
+      <div class="menu">
+        <div class="menu-item selected">
+          <div class="icon-container">
+            <div class="icon selected"></div>
+          </div>
+          <div class="text"></div>
+        </div>
+        <div class="menu-item">
+          <div class="icon-container">
+            <div class="icon"></div>
+          </div>
+          <div class="text"></div>
+        </div>
+      </div>
+    </div>
+    <!-- メインコンテンツ。他のHTMLファイルの内容をここに表示する。 -->
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+ </body>
+</html>
