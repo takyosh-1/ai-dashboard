@@ -33,6 +33,7 @@ def view_page():
 @app.route("/generate", methods=["POST"])
 def generate():
 
+    # テキストファイルを読み込む
     with open(r"static\data\data\taishoku_data.csv", "r", encoding="utf-8") as file:
         input_text = file.read()
     user_input = """あなたはデータサイエンティストであり、人的資本経営に詳しい専門家です。
