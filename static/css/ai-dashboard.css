@@ -11,17 +11,18 @@
   font-family: 'Arial';
   font-style: normal;
   font-size: 29px;
-  line-height: 1; /* 行の高さを1に設定して上揃えを実現 */
+  line-height: 1;
   color: #000000;
   font-weight: 700;
   display: fixed;
-  align-items: flex-start; /* 上揃え */
-  margin: 0; /* マージンをリセット */
-  margin-bottom: 30px; /* 退職者一覧とステータスの間隔を広げる */
-  padding: 0; /* パディングをリセット */
-  width: 500px; /* 幅を指定してスクロール可能にする */
+  align-items: flex-start;
+  margin: 0;
+  margin-bottom: 30px;
+  padding: 0;
+  width: 500px;
   background-color: white;
   height: 30px;
+  flex-shrink: 0;
 }
 
 body {
@@ -123,6 +124,7 @@ button:active {
     align-items: center;
     position: relative;
     width: 200px;
+    margin-right: 10px;
 }
 
 .selectbox-3::after {
@@ -191,4 +193,16 @@ button:disabled {
 .loading-text {
     font-family: 'Arial';
     font-weight: 500;
+}
+
+.controls-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.controls-row .selectbox-3:last-of-type {
+    margin-right: 0;
 }

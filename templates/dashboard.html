@@ -12,15 +12,23 @@
     <iframe title="モックアップ" width="1000" height="952" src="https://app.powerbi.com/reportEmbed?reportId=f1301d71-9c71-4726-afe7-887468b9a531&autoAuth=true&ctid=a4dd5294-24e4-4102-8420-cb86d0baae1e" frameborder="0" allowFullScreen="true"></iframe>
 </div>
 <div class="ai-content">
-    <div style="display: flex;">
+    <div class="controls-row">
         <div class="ai-content-title">
             AIによる退職要因分析・改善策提案
         </div>
         <label class="selectbox-3">
-            <select>
-                <option>全て</option>
-                <option>営業</option>
-                <option>マーケ</option>
+            <select id="department-select">
+                <option value="all">全て</option>
+                <option value="sales">営業</option>
+                <option value="marketing">マーケ</option>
+            </select>
+        </label>
+        <label class="selectbox-3">
+            <select id="model-select">
+                <option value="gpt-4">GPT-4</option>
+                <option value="gpt-4-turbo">GPT-4 Turbo</option>
+                <option value="o3" selected>o3</option>
+                <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
             </select>
         </label>
         <div class="container">
@@ -37,16 +45,23 @@
             const output = document.getElementById("output");
             const loadingIndicator = document.getElementById("loading-indicator");
             const generateButton = document.querySelector("button");
+            const departmentSelect = document.getElementById("department-select");
+            const modelSelect = document.getElementById("model-select");
             
             output.innerHTML = "";
             loadingIndicator.style.display = "flex";
             generateButton.disabled = true;
             generateButton.textContent = "生成中...";
 
+            const requestData = {
+                department: departmentSelect.value,
+                model: modelSelect.value
+            };
+
             fetch("/generate", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: ""
+                body: JSON.stringify(requestData)
             }).then(response => {
                 const reader = response.body.getReader();
                 const decoder = new TextDecoder("utf-8");

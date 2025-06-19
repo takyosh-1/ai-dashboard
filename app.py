@@ -1,4 +1,4 @@
-from flask import Flask,render_template,request, redirect, url_for, session, Response, stream_with_context
+from flask import Flask,render_template,request, redirect, url_for, session, Response, stream_with_context, jsonify
 
 import csv
 import pandas as pd
@@ -32,10 +32,25 @@ def view_page():
 
 @app.route("/generate", methods=["POST"])
 def generate():
+    request_data = request.get_json() or {}
+    selected_department = request_data.get('department', 'all')
+    selected_model = request_data.get('model', 'o3')
+
+    print(f"Selected department: {selected_department}, Selected model: {selected_model}")
 
     # テキストファイルを読み込む
     with open(r"static\data\data\taishoku_data.csv", "r", encoding="utf-8") as file:
         input_text = file.read()
+
+    department_filter_text = ""
+    if selected_department != "all":
+        department_names = {
+            "sales": "営業",
+            "marketing": "マーケ"
+        }
+        dept_name = department_names.get(selected_department, selected_department)
+        department_filter_text = f"\n\n特に「{dept_name}」部署のデータに焦点を当てて分析してください。"
+    
     user_input = """あなたはデータサイエンティストであり、人的資本経営に詳しい専門家です。
                     以下に、退職者に関する従業員データ（CSV）をアップロードします。
                     このデータを分析し、下に示した観点で分析してください。
@@ -50,20 +65,23 @@ def generate():
                     ・解決策の提案（実行可能なアクション含む）
 
                     -- CSVデータの内容は以下の通りです。CSVのヘッダーは「社員ID,氏名,退職日,入社日,勤続年数,所属部署,ランク,性別,年齢,前職,入社区分,退職理由カテゴリ,退職理由自由記述」です。--
+                    """ + department_filter_text + "\n\n" + input_text
 
-                    """ + input_text
-    
     print(user_input)
 
     def stream():
-        response = client.chat.completions.create(
-            model="o3",  # ← Azureポータルで設定した「デプロイ名」に置き換えてください
-            messages=[{"role": "user", "content": user_input}],
-            stream=True,
-        )
-        for chunk in response:
-            if chunk.choices and chunk.choices[0].delta and chunk.choices[0].delta.content:
-                yield chunk.choices[0].delta.content
+        try:
+            response = client.chat.completions.create(
+                model=selected_model,  # 選択されたモデルを使用
+                messages=[{"role": "user", "content": user_input}],
+                stream=True,
+            )
+            for chunk in response:
+                if chunk.choices and chunk.choices[0].delta and chunk.choices[0].delta.content:
+                    yield chunk.choices[0].delta.content
+        except Exception as e:
+            print(f"Error with model {selected_model}: {str(e)}")
+            yield f"エラーが発生しました。モデル '{selected_model}' が利用できない可能性があります。"
     return Response(stream_with_context(stream()), content_type="text/event-stream")
 
 ## 実行
