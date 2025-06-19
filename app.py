@@ -15,8 +15,8 @@ app = Flask(__name__)
 # 環境変数を読み込む
 load_dotenv()
 
-global_model = "o3"
-#global_model = "gpt-4o"
+#global_model = "o3"
+global_model = "gpt-4o"
 
 if global_model == "o3":
     client = AzureOpenAI(
