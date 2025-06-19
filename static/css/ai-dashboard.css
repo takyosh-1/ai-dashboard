@@ -19,7 +19,7 @@
   margin: 0; /* マージンをリセット */
   margin-bottom: 30px; /* 退職者一覧とステータスの間隔を広げる */
   padding: 0; /* パディングをリセット */
-  width: 500px; /* 幅を指定してスクロール可能にする */
+  width: 480px; /* 幅を指定してスクロール可能にする */
   background-color: white;
   height: 30px;
 }
@@ -45,7 +45,7 @@ textarea {
 button {
   position: absolute;
   bottom: 0;
-  width: 60px;
+  width: 70px;
   height: 44.8px;
   font-size: 1rem;
   background-color: #fff;
@@ -97,7 +97,8 @@ button:active {
   flex-direction: column;
   background: white;
   height: 952px; /* 高さを指定してスクロール可能にする */
-  width: 800px; /* 幅を指定してスクロール可能にする */
+  width: 816px; /* 幅を指定してスクロール可能にする */
+  max-width: 816px; /* 最大幅を指定 */
 }
 
 .ai-content::-webkit-scrollbar {
@@ -122,7 +123,7 @@ button:active {
     display: inline-flex;
     align-items: center;
     position: relative;
-    width: 200px;
+    width: 230px;
 }
 
 .selectbox-3::after {
@@ -156,4 +157,39 @@ button:active {
     color: #333333;
     font-size: 1em;
     cursor: pointer;
+}
+
+button:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+    cursor: not-allowed;
+    border: 1px solid #ddd;
+}
+
+#loading-indicator {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    color: #666;
+}
+
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #333;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+    font-family: 'Arial';
+    font-weight: 500;
 }

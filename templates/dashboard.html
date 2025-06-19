@@ -17,10 +17,13 @@
             AIによる退職要因分析・改善策提案
         </div>
         <label class="selectbox-3">
-            <select>
+            <select  id="department-select">
                 <option>全て</option>
                 <option>営業</option>
-                <option>マーケ</option>
+                <option>企画</option>
+                <option>マーケティング</option>
+                <option>総務</option>
+                <option>人事</option>
             </select>
         </label>
         <div class="container">
@@ -28,30 +31,64 @@
         </div>
     </div>
     <div id="output"></div>
+    <div id="loading-indicator" style="display: none;">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">思考中...</div>
+    </div>
     <script>
         function startChat() {
-        const output = document.getElementById("output");
-        output.innerHTML = "";
+            const output = document.getElementById("output");
+            const loadingIndicator = document.getElementById("loading-indicator");
+            const generateButton = document.querySelector("button");
+            const department = document.getElementById("department-select").value; // 追加
+            
+            output.innerHTML = "";
+            loadingIndicator.style.display = "flex";
+            generateButton.disabled = true;
+            generateButton.textContent = "生成中";
 
-        fetch("/generate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: ""
-        }).then(response => {
-            const reader = response.body.getReader();
-            const decoder = new TextDecoder("utf-8");
-            let markdown = "";
+            fetch("/generate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ department })       
+            }).then(response => {
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder("utf-8");
+                let markdown = "";
+                let firstChunk = true;
 
-            function readChunk() {
-            reader.read().then(({ done, value }) => {
-                if (done) return;
-                markdown += decoder.decode(value, { stream: true });
-                output.innerHTML = marked.parse(markdown);
+                function readChunk() {
+                    reader.read().then(({ done, value }) => {
+                        if (done) {
+                            generateButton.disabled = false;
+                            generateButton.textContent = "生成";
+                            return;
+                        }
+                        
+                        if (firstChunk) {
+                            loadingIndicator.style.display = "none";
+                            firstChunk = false;
+                        }
+                        
+                        markdown += decoder.decode(value, { stream: true });
+                        output.innerHTML = marked.parse(markdown);
+                        readChunk();
+                    }).catch(error => {
+                        console.error('Error:', error);
+                        loadingIndicator.style.display = "none";
+                        generateButton.disabled = false;
+                        generateButton.textContent = "生成";
+                        output.innerHTML = "<p>エラーが発生しました。もう一度お試しください。</p>";
+                    });
+                }
                 readChunk();
+            }).catch(error => {
+                console.error('Fetch error:', error);
+                loadingIndicator.style.display = "none";
+                generateButton.disabled = false;
+                generateButton.textContent = "生成";
+                output.innerHTML = "<p>エラーが発生しました。もう一度お試しください。</p>";
             });
-            }
-            readChunk();
-        });
         }
     </script>
 </div>

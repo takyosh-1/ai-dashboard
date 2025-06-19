@@ -32,7 +32,7 @@ html, body {
 
 /* メインコンテンツ */
 .main-content {
-  padding: 24px 49px 0px 49px;
+  padding: 24px 0px 0px 40px;
   position: fixed;
   top: 80px; 
   left: 63px; /* サイドバーの幅 */
@@ -40,7 +40,7 @@ html, body {
   bottom: 0;
   overflow-y: auto;
   height: 952px;
-  width: 1864px;
+  width: 1816px;
   display:flex;
 }
 
