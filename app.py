@@ -28,11 +28,11 @@ if global_model == "o3":
 
 else:
     print("Using GPT-4o model")
-    print(os.getenv("4O_AZURE_OPENAI_ENDPOINT"))
+    print(os.getenv("AZURE_OPENAI_ENDPOINT"))
     # Azure OpenAI クライアント初期化
     client = AzureOpenAI(
-        api_key=os.getenv("4O_AZURE_OPENAI_KEY"),
-        azure_endpoint=os.getenv("4O_AZURE_OPENAI_ENDPOINT"),
+        api_key=os.getenv("AZURE_OPENAI_KEY"),
+        azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
         api_version="2024-12-01-preview",
     )
 
