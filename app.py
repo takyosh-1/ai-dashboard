@@ -42,9 +42,6 @@ def main_page():
 
     # return render_template("request_approval.html")
 
-@app.route("/view_page")
-def view_page():
-    return render_template("view_page.html")
 
 @app.route("/generate", methods=["POST"])
 def generate():
