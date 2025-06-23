@@ -10,49 +10,24 @@
     {% block extra_style %}{% endblock %}
    </head>
   <body>
-    <!-- トップメニューを表示するためのコード -->
-    <div class="navbar">
-      <div class="top-logo-container">
-          <div class="top-logo-text">ワークフローシステム</div>
-      </div>
-      <div class="top-menu-container">
-            <a class="top-menu-item">
-                <div>入社手続き</div>
-            </a>
-            <div class="top-menu-item">
-                <div>退職手続き</div>
-            </div>
-            <div class="top-menu-item active">
-                <div>退職傾向分析</div>
-            </div>
-            <div class="top-menu-item">
-                <div>設定</div>
-            </div>
-      </div>
-    </div>
-    <!-- サイドバーを表示するためのコード（ABeam コンポーネントライブラリに準拠） -->
-    <div class="side-menu-container">
-      <div class="menu-background"></div>
-      <div class="indicator_square"></div>
-      <div class="indicator"></div>
-      <div class="menu">
-        <div class="menu-item selected">
-          <div class="icon-container">
-            <div class="icon selected"></div>
-          </div>
-          <div class="text"></div>
+    <div class="size-adjust-wrapper">
+      <div class="navbar">
+        <div class="top-logo-container">
+            <div class="top-logo-text">HRデータ分析ダッシュボード</div>
         </div>
-        <div class="menu-item">
-          <div class="icon-container">
-            <div class="icon"></div>
+        <div class="top-menu-container">
+          <div class="top-menu-item active">
+            <div>退職傾向分析</div>
           </div>
-          <div class="text"></div>
+          <div class="top-menu-item">
+            <div>設定</div>
+          </div>
         </div>
       </div>
-    </div>
-    <!-- メインコンテンツ。他のHTMLファイルの内容をここに表示する。 -->
-    <div class="main-content">
+      <!-- メインコンテンツ。他のHTMLファイルの内容をここに表示する。 -->
+      <div class="main-content">
         {% block content %}{% endblock %}
+      </div>
     </div>
  </body>
 </html>

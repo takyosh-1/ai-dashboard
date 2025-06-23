@@ -6,7 +6,17 @@ html, body {
   margin: 0;
   padding: 0;
   /* ページ全体の縦・横スクロールバーを消す */
-  overflow: hidden;
+  overflow: auto;       /* 縦スクロール許可 */
+}
+
+.size-adjust-wrapper {
+  position: fixed;
+  overflow: auto;
+  width: 1920px;
+  height: 1080px;
+  max-height: 1080px;
+  transform-origin: top left;
+  transform: scale(0.6666666666666);
 }
 
 .header {
@@ -35,13 +45,12 @@ html, body {
   padding: 24px 0px 0px 40px;
   position: fixed;
   top: 80px; 
-  left: 63px; /* サイドバーの幅 */
   right: 0;
   bottom: 0;
-  overflow-y: auto;
-  height: 952px;
-  width: 1816px;
+  height: 890px;
+  width: 1879px;
   display:flex;
+  overflow: hidden;  /* これで縦横ともスクロールしなくなる */
 }
 
 .initial_introdaction {

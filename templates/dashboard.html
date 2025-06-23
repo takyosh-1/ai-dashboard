@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}住民票記載事項証明書・住民票{% endblock %}
+{% block title %}HRデータ分析ダッシュボード{% endblock %}
 
 {% block extra_style %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/ai-dashboard.css') }}" />
@@ -9,12 +9,20 @@
 
 {% block content %}
 <div class="dashboard">
-    <iframe title="モックアップ" width="1000" height="952" src="https://app.powerbi.com/reportEmbed?reportId=f1301d71-9c71-4726-afe7-887468b9a531&autoAuth=true&ctid=a4dd5294-24e4-4102-8420-cb86d0baae1e" frameborder="0" allowFullScreen="true"></iframe>
+    <iframe title="モックアップ" width="1063" height="890" src="https://app.powerbi.com/reportEmbed?reportId=f1301d71-9c71-4726-afe7-887468b9a531&autoAuth=true&ctid=a4dd5294-24e4-4102-8420-cb86d0baae1e" frameborder="0" allowFullScreen="true"></iframe>
 </div>
 <div class="ai-content">
     <div style="display: flex;">
         <div class="ai-content-title">
             AIによる退職要因分析・改善策提案
+        </div>
+        <div class="container" style ="margin-left: 40px;">
+            <button onclick="startChat()">回答生成</button>
+        </div>
+    </div>
+    <div style="display: flex; height: 70px; position: relative; align-items: center; margin-top: 20px;">
+        <div class="ai-content-subtitle">
+            データ絞り込み：
         </div>
         <label class="selectbox-3">
             <select  id="department-select">
@@ -26,9 +34,15 @@
                 <option>人事</option>
             </select>
         </label>
-        <div class="container">
-            <button onclick="startChat()">生成</button>
+        <div class="ai-content-subtitle">
+            LLMモデル選択：
         </div>
+        <label class="selectbox-3">
+            <select id="model-select">
+                <option value="gpt-4o" selected>GPT-4o</option>
+                <option value="o3">o3</option>
+            </select>
+        </label>
     </div>
     <div id="output"></div>
     <div id="loading-indicator" style="display: none;">
@@ -40,17 +54,24 @@
             const output = document.getElementById("output");
             const loadingIndicator = document.getElementById("loading-indicator");
             const generateButton = document.querySelector("button");
-            const department = document.getElementById("department-select").value; // 追加
+            const departmentSelect = document.getElementById("department-select"); // 追加
+            const modelSelect = document.getElementById("model-select");
+
             
             output.innerHTML = "";
             loadingIndicator.style.display = "flex";
             generateButton.disabled = true;
             generateButton.textContent = "生成中";
+            
+            const requestData = {
+                department: departmentSelect.value,
+                model: modelSelect.value
+            };
 
             fetch("/generate", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ department })       
+                body: JSON.stringify(requestData)      
             }).then(response => {
                 const reader = response.body.getReader();
                 const decoder = new TextDecoder("utf-8");
@@ -61,7 +82,7 @@
                     reader.read().then(({ done, value }) => {
                         if (done) {
                             generateButton.disabled = false;
-                            generateButton.textContent = "生成";
+                            generateButton.textContent = "回答生成";
                             return;
                         }
                         
@@ -77,7 +98,7 @@
                         console.error('Error:', error);
                         loadingIndicator.style.display = "none";
                         generateButton.disabled = false;
-                        generateButton.textContent = "生成";
+                        generateButton.textContent = "回答生成";
                         output.innerHTML = "<p>エラーが発生しました。もう一度お試しください。</p>";
                     });
                 }
@@ -86,7 +107,7 @@
                 console.error('Fetch error:', error);
                 loadingIndicator.style.display = "none";
                 generateButton.disabled = false;
-                generateButton.textContent = "生成";
+                generateButton.textContent = "回答生成";
                 output.innerHTML = "<p>エラーが発生しました。もう一度お試しください。</p>";
             });
         }

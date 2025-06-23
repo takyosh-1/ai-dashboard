@@ -24,6 +24,17 @@
   height: 30px;
 }
 
+.ai-content-subtitle {
+  font-family: 'Arial';
+  font-size: 20px;
+  line-height: 1.2;
+  color: #000000;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
 body {
   background-color: white;
   font-family: sans-serif;
@@ -45,7 +56,7 @@ textarea {
 button {
   position: absolute;
   bottom: 0;
-  width: 70px;
+  width: 100px;
   height: 44.8px;
   font-size: 1rem;
   background-color: #fff;
@@ -96,7 +107,7 @@ button:active {
   display: flex;
   flex-direction: column;
   background: white;
-  height: 952px; /* 高さを指定してスクロール可能にする */
+  height: 890px; /* 高さを指定してスクロール可能にする */
   width: 816px; /* 幅を指定してスクロール可能にする */
   max-width: 816px; /* 最大幅を指定 */
 }
@@ -124,6 +135,7 @@ button:active {
     align-items: center;
     position: relative;
     width: 230px;
+    height: 60px;
 }
 
 .selectbox-3::after {
@@ -131,7 +143,7 @@ button:active {
     right: 30px;
     width: 10px;
     height: 10px;
-    bottom: 20px;
+    bottom: 28px;
     border-top: 1px solid black;
     border-left: 1px solid black;
     transform: rotate(-135deg);
@@ -148,9 +160,9 @@ button:active {
     position: absolute;
     appearance: none;
     min-width: 180px;
+    width: 200px;
     height: 2.8em;
     margin-left: 10px;
-    bottom: 0px;
     padding: .4em calc(.8em + 60px) 0 .8em;
     border: 1px solid #d0d0d0;
     background-color: #fff;
