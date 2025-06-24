@@ -84,8 +84,12 @@ def generate():
         for chunk in response:
             if chunk.choices and chunk.choices[0].delta and chunk.choices[0].delta.content:
                 yield chunk.choices[0].delta.content
+        
+        print(response)
     return Response(stream_with_context(stream()), content_type="text/event-stream")
 
 ## 実行
 if __name__ == "__main__":
     app.run(debug=True)
+
+
