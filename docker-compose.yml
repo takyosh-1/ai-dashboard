@@ -1,0 +1,15 @@
+services:
+  ai-dashboard:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ai-dashboard_shared_data:/tmp/ai_dashboard
+    env_file:
+      - .env
+    environment:
+      AZURE_OPENAI_API_KEY: ${AZURE_OPENAI_API_KEY:-}
+      AZURE_OPENAI_ENDPOINT: ${AZURE_OPENAI_ENDPOINT:-}
+
+volumes:
+  ai-dashboard_shared_data:

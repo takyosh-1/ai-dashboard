@@ -146,8 +146,9 @@ button:active {
   flex-direction: column;
   background: white;
   height: 890px; /* 高さを指定してスクロール可能にする */
-  width: 816px; /* 幅を指定してスクロール可能にする */
-  max-width: 816px; /* 最大幅を指定 */
+  width: 100%; /* 幅をwindowサイズに合わせて可変にする */
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .ai-content::-webkit-scrollbar {
@@ -166,6 +167,8 @@ button:active {
   border-bottom: 1px solid #ccc;
   box-sizing: border-box;
   overflow: hidden;  /* これで縦横ともスクロールしなくなる */
+  width: 1063px;
+  height: 890px;
 }
 
 .selectbox-3 {

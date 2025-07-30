@@ -14,9 +14,12 @@ html, body {
   overflow: auto;
   width: 1920px;
   height: 1080px;
-  max-height: 1080px;
+  max-width: 100vw;
+  max-height: 100vh;
   transform-origin: top left;
-  transform: scale(0.6666666666666);
+  /* transform: scale(0.6666666666666); */
+  background: #fff;
+  /* scaleはJSで制御 */
 }
 
 .header {
@@ -42,15 +45,20 @@ html, body {
 
 /* メインコンテンツ */
 .main-content {
-  padding: 24px 0px 0px 40px;
-  position: fixed;
-  top: 80px; 
-  right: 0;
-  bottom: 0;
+  position: absolute;
+  top: 80px;
+  left: 10px;
+  width: 1980px;
   height: 890px;
-  width: 1879px;
-  display:flex;
-  overflow: hidden;  /* これで縦横ともスクロールしなくなる */
+  padding: 24px 0 0 0;
+  display: flex;
+  overflow: auto;
+  transform-origin: top left;
+}
+
+/* メインコンテンツ */
+.main-content-inner {
+  display: flex;
 }
 
 .initial_introdaction {

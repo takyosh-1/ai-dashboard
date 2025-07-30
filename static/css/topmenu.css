@@ -6,8 +6,8 @@
 .navbar {
 display: flex;
 align-items: center;
-min-width: 1920px;
-width: max-content;
+width: 100vw;
+min-width: 0;
 height: 80px;
 background: var(--brandcolor-Beige);
 position: fixed;

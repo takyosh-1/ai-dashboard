@@ -1,7 +1,8 @@
 .side-menu-container {
   position: fixed;
-  top: 104px;
-  height: 952px;
+  top: 80px;
+  left: 0;
+  height: 100vh;
   width: 64px;
   z-index: 0;
   display: inline-block;

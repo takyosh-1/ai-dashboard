@@ -29,5 +29,21 @@
         {% block content %}{% endblock %}
       </div>
     </div>
+    <script>
+      // main-contentのみscale（1900x980基準）
+      function adjustScale() {
+        const baseWidth = 1900;
+        const baseHeight = 914;
+        const ww = window.innerWidth;
+        const wh = window.innerHeight - 80; // ヘッダーの高さを引く
+        const scale = Math.min(ww / baseWidth, wh / baseHeight);
+        const mainContent = document.querySelector('.main-content');
+        if (mainContent) {
+          mainContent.style.transform = `scale(${scale})`;
+        }
+      }
+      window.addEventListener('resize', adjustScale);
+      window.addEventListener('DOMContentLoaded', adjustScale);
+    </script>
  </body>
 </html>

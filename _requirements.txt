@@ -1,0 +1,7 @@
+openai
+flask
+python-dotenv
+pandas
+numpy
+gunicorn
+gevent>=1.4
